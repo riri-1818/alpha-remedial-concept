@@ -35,6 +35,7 @@
 
   *{box-sizing:border-box;}
   html{background:var(--paper);}
+  [hidden]{display:none!important;}
   body{
     margin:0;background:var(--paper);color:var(--ink);
     font-family:"Work Sans","Hiragino Kaku Gothic Pro","Yu Gothic",sans-serif;
@@ -56,6 +57,12 @@
   nav a{text-decoration:none;border-bottom:1px solid transparent;}
   nav a:hover{border-color:var(--clay);color:var(--ink);}
   .nav-cta{display:flex;gap:14px;align-items:center;}
+
+  .lang-switch{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden;}
+  .lang-btn{appearance:none;border:none;background:transparent;color:var(--ink-soft);font:inherit;font-size:12.5px;font-weight:600;padding:7px 12px;cursor:pointer;letter-spacing:.02em;}
+  .lang-btn[aria-pressed="true"]{background:var(--juniper);color:var(--paper-raised);}
+  .lang-btn:not([aria-pressed="true"]):hover{color:var(--ink);}
+  .lang-btn:focus-visible{outline:2px solid var(--clay);outline-offset:-2px;}
 
   .hero{padding:56px 0 48px;}
   .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:center;}
@@ -102,7 +109,6 @@
   .price-cat{padding:22px 0;border-top:1px solid var(--line);}
   .price-cat:nth-child(-n+2){border-top:none;padding-top:0;}
   .price-cat h4{font-size:14.5px;font-weight:600;}
-  .price-cat .jp-sub{display:block;font-size:12px;color:var(--ink-soft);font-weight:400;margin-top:2px;}
   .price-row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:14px;border-bottom:1px dotted var(--line);}
   .price-row:last-child{border-bottom:none;}
   .price-row .d{color:var(--ink-soft);}
@@ -151,7 +157,6 @@
 
   @media (max-width:760px){
     .hero-grid{grid-template-columns:1fr;}
-    .hero .motif{max-width:200px;}
     .philosophy-grid{grid-template-columns:1fr;}
     .menu-grid{grid-template-columns:1fr;gap:30px;}
     .room-grid{grid-template-columns:1fr;}
@@ -175,14 +180,20 @@
   <div class="wrap headrow">
     <div class="wordmark">ALPHA <span>REMEDIAL</span></div>
     <nav>
-      <a href="#menu">Menu</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#practitioner">Practitioner</a>
-      <a href="#workshop">Workshop</a>
-      <a href="#visit">Visit</a>
+      <a href="#menu"><span data-lang="en">Menu</span><span data-lang="ja" hidden>メニュー</span></a>
+      <a href="#pricing"><span data-lang="en">Pricing</span><span data-lang="ja" hidden>料金</span></a>
+      <a href="#practitioner"><span data-lang="en">Practitioner</span><span data-lang="ja" hidden>施術者</span></a>
+      <a href="#workshop"><span data-lang="en">Workshop</span><span data-lang="ja" hidden>ワークショップ</span></a>
+      <a href="#visit"><span data-lang="en">Visit</span><span data-lang="ja" hidden>アクセス</span></a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">Book on Fresha</a>
+      <div class="lang-switch" role="group" aria-label="Language / 言語">
+        <button type="button" class="lang-btn" data-setlang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-setlang="ja" aria-pressed="false">日本語</button>
+      </div>
+      <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">
+        <span data-lang="en">Book on Fresha</span><span data-lang="ja" hidden>Freshaで予約</span>
+      </a>
     </div>
   </div>
 </header>
@@ -190,12 +201,25 @@
 <section class="hero" style="border-top:none;">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">Remedial Massage &amp; Organic Facial — Haymarket, Sydney</div>
-      <h1>Everyone is born with a natural healing system.</h1>
-      <p class="lead">Alpha Remedial pairs Japanese <span class="jp">整体</span> (seitai) treatment with Juniper's organic skincare — supporting the healing system every client already has, rather than working against it.</p>
+      <div class="eyebrow">
+        <span data-lang="en">Remedial Massage &amp; Organic Facial — Haymarket, Sydney</span>
+        <span data-lang="ja" hidden>リメディアルマッサージ＆オーガニックフェイシャル — シドニー、ヘイマーケット</span>
+      </div>
+      <h1>
+        <span data-lang="en">Everyone is born with a natural healing system.</span>
+        <span data-lang="ja" hidden>人は誰でも、生まれながらに自然治癒力を持っています。</span>
+      </h1>
+      <p class="lead">
+        <span data-lang="en">Alpha Remedial pairs Japanese <span class="jp">整体</span> (seitai) treatment with Juniper's organic skincare — supporting the healing system every client already has, rather than working against it.</span>
+        <span data-lang="ja" hidden>Alpha Remedialは、日本の「整体」とオーガニックスキンケアブランドJuniperを組み合わせた施術で、お客様がもともと持っている自然治癒力をサポートします。</span>
+      </p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">Book on Fresha</a>
-        <a class="btn btn-ghost" href="tel:0466866280">Call 0466 866 280</a>
+        <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">
+          <span data-lang="en">Book on Fresha</span><span data-lang="ja" hidden>Freshaで予約する</span>
+        </a>
+        <a class="btn btn-ghost" href="tel:0466866280">
+          <span data-lang="en">Call 0466 866 280</span><span data-lang="ja" hidden>電話する 0466 866 280</span>
+        </a>
       </div>
     </div>
     <figure class="photo-frame">
@@ -206,10 +230,19 @@
 
 <section>
   <div class="wrap philosophy-grid">
-    <div class="tag">Why Alpha</div>
+    <div class="tag">
+      <span data-lang="en">Why Alpha</span><span data-lang="ja" hidden>Alphaが選ばれる理由</span>
+    </div>
     <div>
-      <p class="quote">"Our organic facial treatments are completely safe and deliver amazing results. Everyone is born with a natural healing system. However, this system can decline due to various factors such as age, stress, illness, and lifestyle habits. Every service at Alpha Remedial focuses on boosting the client's own immunity."<cite>— Home, alpharemedial793.wixsite.com</cite></p>
-      <p class="note">The About page states this a little differently: <em>"All people are born with a natural healing system. However, it is declining due to various causes such as age, stress, vaccines and lifestyle habits."</em> Both pages agree on the same idea — Alpha Remedial's own organic skincare line, Juniper, is chosen because it's "designed to draw out each client's own skin regeneration ability" rather than mask the problem.</p>
+      <p class="quote">
+        <span data-lang="en">"Our organic facial treatments are completely safe and deliver amazing results. Everyone is born with a natural healing system. However, this system can decline due to various factors such as age, stress, illness, and lifestyle habits. Every service at Alpha Remedial focuses on boosting the client's own immunity."</span>
+        <span data-lang="ja" hidden>「当店のオーガニックフェイシャルトリートメントは安全性が高く、確かな効果を実感いただけます。人は誰でも生まれながらに自然治癒力を持っていますが、加齢・ストレス・病気・生活習慣などによってその力は低下することがあります。Alpha Remedialのすべての施術は、お客様ご自身の免疫力を高めることを目的としています。」</span>
+        <cite>— Home, alpharemedial793.wixsite.com</cite>
+      </p>
+      <p class="note">
+        <span data-lang="en">The About page states this a little differently: <em>"All people are born with a natural healing system. However, it is declining due to various causes such as age, stress, vaccines and lifestyle habits."</em> Both pages agree on the same idea — Alpha Remedial's own organic skincare line, Juniper, is chosen because it's "designed to draw out each client's own skin regeneration ability" rather than mask the problem.</span>
+        <span data-lang="ja" hidden>ABOUTページでは少し異なる表現で「<em>人は皆、生まれながらに自然治癒力を持っています。しかし、加齢・ストレス・ワクチン・生活習慣などのさまざまな要因によってその力は低下します。</em>」と述べられています。どちらのページも伝えたいことは同じで、使用するオーガニックスキンケアブランド「Juniper」は、症状を覆い隠すのではなく「お客様ご自身の肌再生能力を引き出すよう設計されている」という点が選ばれた理由です。</span>
+      </p>
     </div>
   </div>
 </section>
@@ -217,39 +250,51 @@
 <section id="menu">
   <div class="wrap">
     <div class="section-head">
-      <h2>Treatment menu</h2>
+      <h2><span data-lang="en">Treatment menu</span><span data-lang="ja" hidden>施術メニュー</span></h2>
     </div>
-    <p class="section-sub">Face and body treatments, performed with Juniper's certified organic products.</p>
+    <p class="section-sub">
+      <span data-lang="en">Face and body treatments, performed with Juniper's certified organic products.</span>
+      <span data-lang="ja" hidden>フェイス・ボディともに、認証オーガニック製品Juniperを使用した施術です。</span>
+    </p>
     <div class="menu-grid">
       <div class="menu-col">
-        <h3>Face</h3>
+        <h3><span data-lang="en">Face</span><span data-lang="ja" hidden>フェイス</span></h3>
         <div class="item">
           <div>
-            <div class="name">Organic Facial Treatment</div>
-            <div class="desc">Cleansing, deep cleansing, oil massage &amp; clay mask</div>
+            <div class="name"><span data-lang="en">Organic Facial Treatment</span><span data-lang="ja" hidden>オーガニックフェイシャルトリートメント</span></div>
+            <div class="desc"><span data-lang="en">Cleansing, deep cleansing, oil massage &amp; clay mask</span><span data-lang="ja" hidden>クレンジング、ディープクレンジング、オイルマッサージ、クレイマスク</span></div>
           </div>
         </div>
       </div>
       <div class="menu-col">
-        <h3>Body</h3>
-        <div class="item"><div><div class="name">Relaxation / Swedish Massage</div><div class="desc">Eases muscle tension, improves circulation</div></div></div>
-        <div class="item"><div><div class="name">Remedial Massage</div><div class="desc">Targets musculoskeletal dysfunction</div></div></div>
-        <div class="item"><div><div class="name">Deep Tissue Massage</div></div></div>
-        <div class="item"><div><div class="name">Sports Massage</div></div></div>
-        <div class="item"><div><div class="name">Aromatherapy Massage</div></div></div>
-        <div class="item"><div><div class="name">Pregnancy (Maternity) Massage</div></div></div>
-        <div class="item"><div><div class="name">Seitai &amp; Tenryojutsu Treatment</div></div><div class="jp-label">整体・テンリョウ術</div></div>
+        <h3><span data-lang="en">Body</span><span data-lang="ja" hidden>ボディ</span></h3>
+        <div class="item"><div>
+          <div class="name"><span data-lang="en">Relaxation / Swedish Massage</span><span data-lang="ja" hidden>リラクゼーション/スウェディッシュマッサージ</span></div>
+          <div class="desc"><span data-lang="en">Eases muscle tension, improves circulation</span><span data-lang="ja" hidden>筋肉の緊張を緩和し、血行を促進</span></div>
+        </div></div>
+        <div class="item"><div>
+          <div class="name"><span data-lang="en">Remedial Massage</span><span data-lang="ja" hidden>リメディアルマッサージ</span></div>
+          <div class="desc"><span data-lang="en">Targets musculoskeletal dysfunction</span><span data-lang="ja" hidden>筋骨格系の不調にアプローチ</span></div>
+        </div></div>
+        <div class="item"><div class="name"><span data-lang="en">Deep Tissue Massage</span><span data-lang="ja" hidden>ディープティッシュマッサージ</span></div></div>
+        <div class="item"><div class="name"><span data-lang="en">Sports Massage</span><span data-lang="ja" hidden>スポーツマッサージ</span></div></div>
+        <div class="item"><div class="name"><span data-lang="en">Aromatherapy Massage</span><span data-lang="ja" hidden>アロマテラピーマッサージ</span></div></div>
+        <div class="item"><div class="name"><span data-lang="en">Pregnancy (Maternity) Massage</span><span data-lang="ja" hidden>妊娠中の方向けマッサージ</span></div></div>
+        <div class="item"><div class="name"><span data-lang="en">Seitai &amp; Tenryojutsu Treatment</span><span data-lang="ja" hidden>整体・テンリョウ術</span></div></div>
       </div>
     </div>
-    <p class="price-note">Our therapists are highly skilled and certified — remedial massage qualifications held in both Japan and Australia.</p>
+    <p class="price-note">
+      <span data-lang="en">Our therapists are highly skilled and certified — remedial massage qualifications held in both Japan and Australia.</span>
+      <span data-lang="ja" hidden>施術者は高い技術と資格を持ち、日本・オーストラリア両国でリメディアルマッサージの資格を取得しています。</span>
+    </p>
     <div class="room-grid">
       <figure>
         <div class="photo-frame"><img src="images/facial.png" alt="Organic facial treatment in progress at Alpha Remedial"></div>
-        <figcaption>Organic facial treatment</figcaption>
+        <figcaption><span data-lang="en">Organic facial treatment</span><span data-lang="ja" hidden>オーガニックフェイシャル施術</span></figcaption>
       </figure>
       <figure>
         <div class="photo-frame"><img src="images/body.jpg" alt="Remedial massage treatment at Alpha Remedial" style="object-position:50% 30%;"></div>
-        <figcaption>Remedial / relaxation massage</figcaption>
+        <figcaption><span data-lang="en">Remedial / relaxation massage</span><span data-lang="ja" hidden>リメディアル/リラクゼーションマッサージ</span></figcaption>
       </figure>
     </div>
   </div>
@@ -258,78 +303,81 @@
 <section id="pricing">
   <div class="wrap">
     <div class="section-head">
-      <h2>Full price list</h2>
-      <span class="section-sub">All prices as listed on Alpha Remedial's own menu page.</span>
+      <h2><span data-lang="en">Full price list</span><span data-lang="ja" hidden>料金一覧</span></h2>
+      <span class="section-sub">
+        <span data-lang="en">All prices as listed on Alpha Remedial's own menu page.</span>
+        <span data-lang="ja" hidden>Alpha Remedial公式メニューページ記載の料金です。</span>
+      </span>
     </div>
     <div class="price-grid">
       <div class="price-cat">
-        <h4>Alpha Special <span class="jp-sub">30分/45分/60分の組み合わせ + ヘッドマッサージ</span></h4>
-        <div class="price-row"><span class="d">Relaxation/Facial 30 + Head 15 (45 min)</span><span class="p">$90</span></div>
-        <div class="price-row"><span class="d">Relaxation/Facial 30 + Head 30 (60 min)</span><span class="p">$110</span></div>
-        <div class="price-row"><span class="d">Relaxation/Facial 45 + Head 15 (60 min)</span><span class="p">$110</span></div>
-        <div class="price-row"><span class="d">Relaxation/Facial 45 + Head 30 (75 min)</span><span class="p">$140</span></div>
-        <div class="price-row"><span class="d">Relaxation 60 + Head 15 (75 min)</span><span class="p">$140</span></div>
-        <div class="price-row"><span class="d">Relaxation 60 + Head 30 (90 min)</span><span class="p">$160</span></div>
+        <h4><span data-lang="en">Alpha Special</span><span data-lang="ja" hidden>Alpha Special（30・45・60分の組み合わせ＋ヘッドマッサージ）</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">Relaxation/Facial 30 + Head 15 (45 min)</span><span data-lang="ja" hidden>30分リラクゼーション/フェイシャル + 15分ヘッドマッサージ（計45分）</span></span><span class="p">$90</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Relaxation/Facial 30 + Head 30 (60 min)</span><span data-lang="ja" hidden>30分リラクゼーション/フェイシャル + 30分ヘッドマッサージ（計60分）</span></span><span class="p">$110</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Relaxation/Facial 45 + Head 15 (60 min)</span><span data-lang="ja" hidden>45分リラクゼーション/フェイシャル + 15分ヘッドマッサージ（計60分）</span></span><span class="p">$110</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Relaxation/Facial 45 + Head 30 (75 min)</span><span data-lang="ja" hidden>45分リラクゼーション/フェイシャル + 30分ヘッドマッサージ（計75分）</span></span><span class="p">$140</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Relaxation 60 + Head 15 (75 min)</span><span data-lang="ja" hidden>60分リラクゼーションマッサージ + 15分ヘッドマッサージ（計75分）</span></span><span class="p">$140</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Relaxation 60 + Head 30 (90 min)</span><span data-lang="ja" hidden>60分リラクゼーションマッサージ + 30分ヘッドマッサージ（計90分）</span></span><span class="p">$160</span></div>
       </div>
       <div class="price-cat">
-        <h4>Recommended Packages <span class="jp-sub">推奨パッケージ — FUJI / UMI / HANA</span></h4>
-        <div class="price-row"><span class="d">FUJI — Body Massage 30 + Organic Facial 60</span><span class="p">$170</span></div>
-        <div class="price-row"><span class="d">UMI — Body Massage 30 + Facial 45 + Head 15</span><span class="p">$175</span></div>
-        <div class="price-row"><span class="d">HANA — Swedish 60 + Mini Facial 30</span><span class="p">$170</span></div>
+        <h4><span data-lang="en">Recommended Packages</span><span data-lang="ja" hidden>おすすめパッケージ（FUJI／UMI／HANA）</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">FUJI — Body Massage 30 + Organic Facial 60</span><span data-lang="ja" hidden>FUJI：30分ボディマッサージ + 60分オーガニックフェイシャル</span></span><span class="p">$170</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">UMI — Body Massage 30 + Facial 45 + Head 15</span><span data-lang="ja" hidden>UMI：30分ボディマッサージ + 45分オーガニックフェイシャル + 15分ヘッドマッサージ</span></span><span class="p">$175</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">HANA — Swedish 60 + Mini Facial 30</span><span data-lang="ja" hidden>HANA：60分スウェディッシュ/リラクゼーションマッサージ + 30分ミニフェイシャル</span></span><span class="p">$170</span></div>
       </div>
       <div class="price-cat">
-        <h4>Seitai &amp; Tenryojutsu Treatment <span class="jp-sub">セイタイ治療＆テンリョウ術</span></h4>
-        <div class="price-row"><span class="d">First visit, 60 min (incl. consultation)</span><span class="p">$120</span></div>
-        <div class="price-row"><span class="d">Follow-up 45 min</span><span class="p">$100</span></div>
-        <div class="price-row"><span class="d">Follow-up 60 min</span><span class="p">$120</span></div>
-        <div class="price-row"><span class="d">Follow-up 75 min</span><span class="p">$150</span></div>
-        <div class="price-row"><span class="d">Follow-up 90 min</span><span class="p">$170</span></div>
-        <div class="price-row"><span class="d">Child first visit, under 18, 45 min</span><span class="p">$100</span></div>
-        <div class="price-row"><span class="d">Child follow-up, under 18, 30 min</span><span class="p">$70</span></div>
-        <div class="addon">+$10 on any Seitai session while pregnant</div>
+        <h4><span data-lang="en">Seitai &amp; Tenryojutsu Treatment</span><span data-lang="ja" hidden>セイタイ治療＆テンリョウ術</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">First visit, 60 min (incl. consultation)</span><span data-lang="ja" hidden>初回（60分、相談含む）</span></span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Follow-up 45 min</span><span data-lang="ja" hidden>フォローアップ（45分）</span></span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Follow-up 60 min</span><span data-lang="ja" hidden>フォローアップ（60分）</span></span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Follow-up 75 min</span><span data-lang="ja" hidden>フォローアップ（75分）</span></span><span class="p">$150</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Follow-up 90 min</span><span data-lang="ja" hidden>フォローアップ（90分）</span></span><span class="p">$170</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Child first visit, under 18, 45 min</span><span data-lang="ja" hidden>子ども初回（18歳以下、45分）</span></span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Child follow-up, under 18, 30 min</span><span data-lang="ja" hidden>子どもフォローアップ（18歳以下、30分）</span></span><span class="p">$70</span></div>
+        <div class="addon"><span data-lang="en">+$10 on any Seitai session while pregnant</span><span data-lang="ja" hidden>妊娠中はどのセイタイ施術も+$10</span></div>
       </div>
       <div class="price-cat">
-        <h4>Organic Facial Treatment <span class="jp-sub">オーガニックフェイシャル治療</span></h4>
-        <div class="price-row"><span class="d">Mini Facial, 30 min</span><span class="p">$60</span></div>
-        <div class="price-row"><span class="d">45 min (incl. consultation)</span><span class="p">$90</span></div>
-        <div class="price-row"><span class="d">60 min (incl. consultation)</span><span class="p">$110</span></div>
-        <div class="price-row"><span class="d">Men's Facial, 50 min</span><span class="p">$100</span></div>
+        <h4><span data-lang="en">Organic Facial Treatment</span><span data-lang="ja" hidden>オーガニックフェイシャル治療</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">Mini Facial, 30 min</span><span data-lang="ja" hidden>30分ミニフェイシャル</span></span><span class="p">$60</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">45 min (incl. consultation)</span><span data-lang="ja" hidden>45分（相談含む）</span></span><span class="p">$90</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">60 min (incl. consultation)</span><span data-lang="ja" hidden>60分（相談含む）</span></span><span class="p">$110</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">Men's Facial, 50 min</span><span data-lang="ja" hidden>メンズフェイシャル（50分）</span></span><span class="p">$100</span></div>
       </div>
       <div class="price-cat">
-        <h4>Remedial / Sports Massage</h4>
-        <div class="price-row"><span class="d">30 min</span><span class="p">$70</span></div>
-        <div class="price-row"><span class="d">45 min</span><span class="p">$100</span></div>
-        <div class="price-row"><span class="d">60 min</span><span class="p">$120</span></div>
-        <div class="price-row"><span class="d">75 min</span><span class="p">$150</span></div>
-        <div class="price-row"><span class="d">90 min</span><span class="p">$170</span></div>
+        <h4><span data-lang="en">Remedial / Sports Massage</span><span data-lang="ja" hidden>リメディアル／スポーツマッサージ</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">30 min</span><span data-lang="ja" hidden>30分</span></span><span class="p">$70</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">45 min</span><span data-lang="ja" hidden>45分</span></span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">60 min</span><span data-lang="ja" hidden>60分</span></span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">75 min</span><span data-lang="ja" hidden>75分</span></span><span class="p">$150</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">90 min</span><span data-lang="ja" hidden>90分</span></span><span class="p">$170</span></div>
       </div>
       <div class="price-cat">
-        <h4>Swedish / Relaxation Massage</h4>
-        <div class="price-row"><span class="d">30 min</span><span class="p">$60</span></div>
-        <div class="price-row"><span class="d">45 min</span><span class="p">$90</span></div>
-        <div class="price-row"><span class="d">60 min</span><span class="p">$110</span></div>
-        <div class="price-row"><span class="d">75 min</span><span class="p">$140</span></div>
-        <div class="price-row"><span class="d">90 min</span><span class="p">$160</span></div>
+        <h4><span data-lang="en">Swedish / Relaxation Massage</span><span data-lang="ja" hidden>スウェディッシュ／リラクゼーションマッサージ</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">30 min</span><span data-lang="ja" hidden>30分</span></span><span class="p">$60</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">45 min</span><span data-lang="ja" hidden>45分</span></span><span class="p">$90</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">60 min</span><span data-lang="ja" hidden>60分</span></span><span class="p">$110</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">75 min</span><span data-lang="ja" hidden>75分</span></span><span class="p">$140</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">90 min</span><span data-lang="ja" hidden>90分</span></span><span class="p">$160</span></div>
       </div>
       <div class="price-cat">
-        <h4>Pregnancy Massage</h4>
-        <div class="price-row"><span class="d">60 min</span><span class="p">$130</span></div>
+        <h4><span data-lang="en">Pregnancy Massage</span><span data-lang="ja" hidden>妊娠マッサージ</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">60 min</span><span data-lang="ja" hidden>60分</span></span><span class="p">$130</span></div>
       </div>
       <div class="price-cat">
-        <h4>Aroma Massage</h4>
-        <div class="price-row"><span class="d">30 min</span><span class="p">$70</span></div>
-        <div class="price-row"><span class="d">45 min</span><span class="p">$100</span></div>
-        <div class="price-row"><span class="d">60 min</span><span class="p">$120</span></div>
-        <div class="price-row"><span class="d">75 min</span><span class="p">$150</span></div>
-        <div class="price-row"><span class="d">90 min</span><span class="p">$170</span></div>
+        <h4><span data-lang="en">Aroma Massage</span><span data-lang="ja" hidden>アロママッサージ</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">30 min</span><span data-lang="ja" hidden>30分</span></span><span class="p">$70</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">45 min</span><span data-lang="ja" hidden>45分</span></span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">60 min</span><span data-lang="ja" hidden>60分</span></span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">75 min</span><span data-lang="ja" hidden>75分</span></span><span class="p">$150</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">90 min</span><span data-lang="ja" hidden>90分</span></span><span class="p">$170</span></div>
       </div>
       <div class="price-cat">
-        <h4>Deep Tissue Massage</h4>
-        <div class="price-row"><span class="d">30 min</span><span class="p">$70</span></div>
-        <div class="price-row"><span class="d">45 min</span><span class="p">$100</span></div>
-        <div class="price-row"><span class="d">60 min</span><span class="p">$120</span></div>
-        <div class="price-row"><span class="d">75 min</span><span class="p">$150</span></div>
-        <div class="price-row"><span class="d">90 min</span><span class="p">$175</span></div>
+        <h4><span data-lang="en">Deep Tissue Massage</span><span data-lang="ja" hidden>ディープティッシュマッサージ</span></h4>
+        <div class="price-row"><span class="d"><span data-lang="en">30 min</span><span data-lang="ja" hidden>30分</span></span><span class="p">$70</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">45 min</span><span data-lang="ja" hidden>45分</span></span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">60 min</span><span data-lang="ja" hidden>60分</span></span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">75 min</span><span data-lang="ja" hidden>75分</span></span><span class="p">$150</span></div>
+        <div class="price-row"><span class="d"><span data-lang="en">90 min</span><span data-lang="ja" hidden>90分</span></span><span class="p">$175</span></div>
       </div>
     </div>
   </div>
@@ -338,8 +386,11 @@
 <section class="ingredient">
   <div class="wrap">
     <div>
-      <h2>Juniper, by name and by nature</h2>
-      <p>Facial treatments use Juniper's premium organic skincare line, chosen for its gentle, plant-based formulation and its ability to support the skin's own regenerative capacity rather than override it.</p>
+      <h2><span data-lang="en">Juniper, by name and by nature</span><span data-lang="ja" hidden>名前も、成分も、Juniper</span></h2>
+      <p>
+        <span data-lang="en">Facial treatments use Juniper's premium organic skincare line, chosen for its gentle, plant-based formulation and its ability to support the skin's own regenerative capacity rather than override it.</span>
+        <span data-lang="ja" hidden>フェイシャル施術には、プレミアムオーガニックスキンケアブランド「Juniper」を使用しています。肌に優しい植物由来の処方で、肌そのものの再生能力を引き出すよう設計されています。</span>
+      </p>
     </div>
     <figure class="leaf-badge" style="width:100%;">
       <div class="photo-frame" style="aspect-ratio:1/1;max-width:320px;margin:0 auto;">
@@ -354,22 +405,28 @@
     <div class="stat-pair">
       <div>
         <div class="stat-num">15+</div>
-        <div class="stat-label">Years in massage &amp; seitai</div>
+        <div class="stat-label"><span data-lang="en">Years in massage &amp; seitai</span><span data-lang="ja" hidden>マッサージ・整体歴</span></div>
       </div>
       <div>
         <div class="stat-num">20k+</div>
-        <div class="stat-label">Clients treated</div>
+        <div class="stat-label"><span data-lang="en">Clients treated</span><span data-lang="ja" hidden>施術人数</span></div>
       </div>
     </div>
     <div class="practitioner">
       <h3>Mayumi Arahata</h3>
       <div class="jp-name">新原真由美</div>
-      <p>Founder and lead therapist at Alpha Remedial. Certified in remedial massage in both Japan and Australia, with over 15 years in the industry and more than 20,000 clients treated. Mayumi occasionally runs small, beginner-friendly massage workshops for people who are curious but have never had one.</p>
-      <span class="cred">Remedial Massage Therapist — certified in Japan &amp; Australia</span>
+      <p>
+        <span data-lang="en">Founder and lead therapist at Alpha Remedial. Certified in remedial massage in both Japan and Australia, with over 15 years in the industry and more than 20,000 clients treated. Mayumi occasionally runs small, beginner-friendly massage workshops for people who are curious but have never had one.</span>
+        <span data-lang="ja" hidden>Alpha Remedialの創業者・主任セラピスト。日本・オーストラリア両国でリメディアルマッサージの資格を取得し、業界歴15年以上、施術実績は2万人以上。マッサージが気になるけれど受けたことがない方向けに、少人数制のワークショップを不定期で開催しています。</span>
+      </p>
+      <span class="cred">
+        <span data-lang="en">Remedial Massage Therapist — certified in Japan &amp; Australia</span>
+        <span data-lang="ja" hidden>リメディアルマッサージセラピスト — 日本・オーストラリア両国で資格取得</span>
+      </span>
       <div class="timeline">
-        <div class="t"><b>2007</b><span>Began working in Australia</span></div>
-        <div class="t"><b>2017</b><span>Opened MH Clinic</span></div>
-        <div class="t"><b>2020</b><span>Opened Alpha Remedial in the CBD</span></div>
+        <div class="t"><b>2007</b><span><span data-lang="en">Began working in Australia</span><span data-lang="ja" hidden>オーストラリアで活動開始</span></span></div>
+        <div class="t"><b>2017</b><span><span data-lang="en">Opened MH Clinic</span><span data-lang="ja" hidden>MHクリニック開業</span></span></div>
+        <div class="t"><b>2020</b><span><span data-lang="en">Opened Alpha Remedial in the CBD</span><span data-lang="ja" hidden>CBDにAlpha Remedialを開業</span></span></div>
       </div>
     </div>
   </div>
@@ -378,33 +435,45 @@
 <section class="workshop" id="workshop">
   <div class="wrap workshop-grid">
     <div>
-      <div class="label">Upcoming workshop</div>
-      <h3>Intro to Massage — for complete beginners</h3>
-      <p>"What actually is a massage?" A small, unhurried group session covering hand-to-forearm dry &amp; oil massage and shoulder dry massage. No experience needed — oils, cream and tea included.</p>
-      <p class="quotes">"経験ゼロでもOK！少人数でゆっくり体験していただきます。マッサージは、ただ強く押したり揉んだりするだけではありません。"</p>
-      <p class="price-note">Sun 27 Sep, 10:00–11:30 · Level 4, 793 George St, Haymarket · Workshop enquiries: <a href="tel:0402922505">0402 922 505</a><br>Dates change — confirm the current session via Fresha or phone before attending.</p>
+      <div class="label"><span data-lang="en">Upcoming workshop</span><span data-lang="ja" hidden>開催予定のワークショップ</span></div>
+      <h3><span data-lang="en">Intro to Massage — for complete beginners</span><span data-lang="ja" hidden>はじめてのマッサージ体験ワークショップ</span></h3>
+      <p>
+        <span data-lang="en">"What actually is a massage?" A small, unhurried group session covering hand-to-forearm dry &amp; oil massage and shoulder dry massage. No experience needed — oils, cream and tea included.</span>
+        <span data-lang="ja" hidden>「マッサージって、そもそも何？」手〜前腕のドライ＆オイルマッサージ、肩のドライマッサージを体験する少人数制ワークショップです。経験ゼロでもOK。オイル・クリーム・お茶付き。</span>
+      </p>
+      <p class="quotes">
+        <span data-lang="en">"No experience needed — we'll take it slow in a small group. Massage isn't just about pressing or kneading hard."</span>
+        <span data-lang="ja" hidden>「経験ゼロでもOK！少人数でゆっくり体験していただきます。マッサージは、ただ強く押したり揉んだりするだけではありません。」</span>
+      </p>
+      <p class="price-note">
+        <span data-lang="en">Sun 27 Sep, 10:00–11:30 · Level 4, 793 George St, Haymarket · Workshop enquiries: </span>
+        <span data-lang="ja" hidden>開催日：9月27日（日）10:00〜11:30 ・ Level 4, 793 George St, Haymarket ・ ワークショップに関するお問い合わせ：</span>
+        <a href="tel:0402922505">0402 922 505</a><br>
+        <span data-lang="en">Dates change — confirm the current session via Fresha or phone before attending.</span>
+        <span data-lang="ja" hidden>開催日は変更になる場合があります。ご来店前にFreshaまたはお電話で最新情報をご確認ください。</span>
+      </p>
     </div>
-    <div class="price-tag">$100<small>90 minutes</small></div>
+    <div class="price-tag">$100<small><span data-lang="en">90 minutes</span><span data-lang="ja" hidden>90分</span></small></div>
   </div>
 </section>
 
 <section id="visit">
   <div class="wrap visit-grid">
     <div>
-      <h2>Hours</h2>
+      <h2><span data-lang="en">Hours</span><span data-lang="ja" hidden>営業時間</span></h2>
       <table class="hours">
-        <tr><td>Monday</td><td>Closed</td></tr>
-        <tr><td>Tue – Sat</td><td>10:00 – 20:00 (last booking 18:30)</td></tr>
-        <tr><td>Sunday</td><td>10:00 – 18:00 (last booking 16:30)</td></tr>
+        <tr><td><span data-lang="en">Monday</span><span data-lang="ja" hidden>月曜日</span></td><td><span data-lang="en">Closed</span><span data-lang="ja" hidden>定休日</span></td></tr>
+        <tr><td><span data-lang="en">Tue – Sat</span><span data-lang="ja" hidden>火〜土</span></td><td><span data-lang="en">10:00 – 20:00 (last booking 18:30)</span><span data-lang="ja" hidden>10:00〜20:00（最終受付18:30）</span></td></tr>
+        <tr><td><span data-lang="en">Sunday</span><span data-lang="ja" hidden>日曜日</span></td><td><span data-lang="en">10:00 – 18:00 (last booking 16:30)</span><span data-lang="ja" hidden>10:00〜18:00（最終受付16:30）</span></td></tr>
       </table>
     </div>
     <div class="contact-block">
-      <h2>Visit &amp; contact</h2>
-      <p><span class="k">Address</span>Level 4, 793 George Street, Haymarket NSW</p>
-      <p><span class="k">Phone (general)</span><a href="tel:0466866280">0466 866 280</a></p>
-      <p><span class="k">Phone (workshop)</span><a href="tel:0402922505">0402 922 505</a></p>
-      <p><span class="k">Email</span><a href="mailto:alpharemedial793@gmail.com">alpharemedial793@gmail.com</a></p>
-      <p><span class="k">Booking</span><a href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">Book online via Fresha ↗</a></p>
+      <h2><span data-lang="en">Visit &amp; contact</span><span data-lang="ja" hidden>アクセス・お問い合わせ</span></h2>
+      <p><span class="k"><span data-lang="en">Address</span><span data-lang="ja" hidden>住所</span></span>Level 4, 793 George Street, Haymarket NSW</p>
+      <p><span class="k"><span data-lang="en">Phone (general)</span><span data-lang="ja" hidden>電話（一般）</span></span><a href="tel:0466866280">0466 866 280</a></p>
+      <p><span class="k"><span data-lang="en">Phone (workshop)</span><span data-lang="ja" hidden>電話（ワークショップ）</span></span><a href="tel:0402922505">0402 922 505</a></p>
+      <p><span class="k"><span data-lang="en">Email</span><span data-lang="ja" hidden>メール</span></span><a href="mailto:alpharemedial793@gmail.com">alpharemedial793@gmail.com</a></p>
+      <p><span class="k"><span data-lang="en">Booking</span><span data-lang="ja" hidden>予約</span></span><a href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener"><span data-lang="en">Book online via Fresha ↗</span><span data-lang="ja" hidden>Freshaでオンライン予約 ↗</span></a></p>
       <div class="social-row">
         <a href="https://www.instagram.com/alpharemedial" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/alpharemedial" target="_blank" rel="noopener">Facebook</a>
@@ -418,7 +487,9 @@
   <div class="wrap">
     <div class="footrow">
       <div class="wordmark">ALPHA <span>REMEDIAL</span></div>
-      <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">Book on Fresha</a>
+      <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">
+        <span data-lang="en">Book on Fresha</span><span data-lang="ja" hidden>Freshaで予約</span>
+      </a>
     </div>
     <div class="disclaimer">
       これはWeb制作の営業提案として作成したコンセプト・リデザインです。Alpha Remedial様の公式サイトではなく、無断で運用・掲載しているものでもありません。掲載内容は同社の既存サイト(alpharemedial793.wixsite.com)・Freshaの公開情報を基に構成した試作品です。最新情報は公式の予約先(Fresha)・電話にてご確認ください。<br>
@@ -426,5 +497,27 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var KEY = 'ar-lang';
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-lang]').forEach(function(el){
+      el.hidden = el.getAttribute('data-lang') !== lang;
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.setlang === lang));
+    });
+    try{ localStorage.setItem(KEY, lang); }catch(e){}
+  }
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.setlang); });
+  });
+  var saved = 'en';
+  try{ saved = localStorage.getItem(KEY) || 'en'; }catch(e){}
+  apply(saved);
+})();
+</script>
 </body>
 </html>
