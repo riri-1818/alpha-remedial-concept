@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alpha Remedial — Concept Redesign</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#ECEEE4;
+    --paper-raised:#F5F6EF;
+    --ink:#20291F;
+    --ink-soft:#4C5749;
+    --juniper:#2F4A3C;
+    --juniper-deep:#1D3026;
+    --sage:#B9C4AC;
+    --sage-tint:#DFE3D5;
+    --clay:#9C6B3E;
+    --clay-deep:#7C522E;
+    --line:rgba(32,42,34,0.14);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#171C16; --paper-raised:#1F251B; --ink:#EDEFE6; --ink-soft:#BFC7B4;
+      --juniper:#93BA9E; --juniper-deep:#C7DECB; --sage:#3A4634; --sage-tint:#242C20;
+      --clay:#D89B67; --clay-deep:#EBBA8C; --line:rgba(237,239,230,0.16);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171C16; --paper-raised:#1F251B; --ink:#EDEFE6; --ink-soft:#BFC7B4;
+    --juniper:#93BA9E; --juniper-deep:#C7DECB; --sage:#3A4634; --sage-tint:#242C20;
+    --clay:#D89B67; --clay-deep:#EBBA8C; --line:rgba(237,239,230,0.16);
+  }
+
+  *{box-sizing:border-box;}
+  html{background:var(--paper);}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Work Sans","Hiragino Kaku Gothic Pro","Yu Gothic",sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3{font-family:"Fraunces","Hiragino Mincho Pro",serif;font-weight:500;letter-spacing:-0.01em;text-wrap:balance;margin:0;color:var(--ink);}
+  .jp{font-family:"Hiragino Kaku Gothic Pro","Yu Gothic",sans-serif;}
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+
+  .ribbon{background:var(--juniper-deep);color:var(--paper);font-size:12.5px;letter-spacing:.01em;text-align:center;padding:9px 16px;}
+  .ribbon b{font-weight:600;}
+
+  header{padding:20px 0 12px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:5;}
+  .headrow{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .wordmark{font-family:"Fraunces",serif;font-size:18px;letter-spacing:.02em;}
+  .wordmark span{color:var(--juniper);}
+  nav{display:flex;gap:22px;font-size:13.5px;color:var(--ink-soft);flex-wrap:wrap;}
+  nav a{text-decoration:none;border-bottom:1px solid transparent;}
+  nav a:hover{border-color:var(--clay);color:var(--ink);}
+  .nav-cta{display:flex;gap:14px;align-items:center;}
+
+  .hero{padding:56px 0 48px;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:center;}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay-deep);font-weight:600;margin-bottom:16px;}
+  .hero h1{font-size:clamp(28px,4vw,46px);line-height:1.16;}
+  .hero p.lead{margin-top:18px;max-width:48ch;color:var(--ink-soft);font-size:16px;}
+  .cta-row{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:3px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid transparent;}
+  .btn-primary{background:var(--juniper);color:var(--paper-raised);}
+  .btn-primary:hover{background:var(--juniper-deep);}
+  .btn-ghost{border-color:var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink-soft);}
+  .photo-frame{border-radius:6px;overflow:hidden;border:1px solid var(--line);position:relative;}
+  .photo-frame img{display:block;width:100%;height:100%;object-fit:cover;}
+  .photo-frame::after{content:"";position:absolute;inset:0;background:var(--juniper);opacity:0.06;mix-blend-mode:multiply;pointer-events:none;}
+  .hero .photo-frame{aspect-ratio:4/5;}
+  figure{margin:0;}
+  figcaption{font-size:12px;color:var(--ink-soft);margin-top:8px;}
+
+  .room-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;}
+  .room-grid .photo-frame{aspect-ratio:5/4;}
+
+  section{padding:48px 0;border-top:1px solid var(--line);}
+  .section-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:8px;}
+  .section-head h2{font-size:clamp(23px,2.8vw,29px);}
+  .section-sub{color:var(--ink-soft);font-size:14.5px;max-width:56ch;}
+
+  .philosophy-grid{display:grid;grid-template-columns:170px 1fr;gap:32px;}
+  .tag{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);padding-top:6px;}
+  .quote{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(19px,2.3vw,24px);line-height:1.45;color:var(--ink);margin:0;}
+  .quote cite{display:block;font-family:"Work Sans",sans-serif;font-weight:500;font-size:12.5px;color:var(--ink-soft);margin-top:10px;font-style:normal;}
+  .philosophy-grid p.note{color:var(--ink-soft);margin-top:18px;max-width:64ch;font-size:15px;}
+
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:30px;}
+  .menu-col h3{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--clay-deep);padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:4px;}
+  .item{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);}
+  .item:last-child{border-bottom:none;}
+  .item .name{font-weight:500;}
+  .item .desc{color:var(--ink-soft);font-size:13.5px;margin-top:3px;}
+  .item .jp-label{color:var(--ink-soft);font-size:12.5px;white-space:nowrap;padding-top:2px;}
+
+  .price-note{color:var(--ink-soft);font-size:14px;margin-top:6px;}
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 44px;margin-top:34px;}
+  .price-cat{padding:22px 0;border-top:1px solid var(--line);}
+  .price-cat:nth-child(-n+2){border-top:none;padding-top:0;}
+  .price-cat h4{font-size:14.5px;font-weight:600;}
+  .price-cat .jp-sub{display:block;font-size:12px;color:var(--ink-soft);font-weight:400;margin-top:2px;}
+  .price-row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:14px;border-bottom:1px dotted var(--line);}
+  .price-row:last-child{border-bottom:none;}
+  .price-row .d{color:var(--ink-soft);}
+  .price-row .p{font-variant-numeric:tabular-nums;font-weight:500;white-space:nowrap;}
+  .addon{font-size:12px;color:var(--ink-soft);margin-top:8px;}
+
+  .ingredient{background:var(--sage-tint);}
+  .ingredient .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .ingredient p{color:var(--ink-soft);margin-top:14px;font-size:15px;max-width:46ch;}
+  .leaf-badge{display:flex;justify-content:center;}
+
+  .practitioner-grid{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start;}
+  .stat-pair{display:flex;flex-direction:column;gap:28px;}
+  .stat-num{font-family:"Fraunces",serif;font-weight:500;font-size:60px;line-height:1;color:var(--juniper);font-variant-numeric:tabular-nums;}
+  .stat-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px;max-width:14ch;}
+  .practitioner h3{font-size:22px;}
+  .practitioner .jp-name{color:var(--ink-soft);font-size:14px;margin-top:2px;}
+  .practitioner p{color:var(--ink-soft);margin-top:14px;max-width:58ch;font-size:15px;}
+  .cred{display:inline-block;margin-top:14px;font-size:13px;letter-spacing:.02em;color:var(--clay-deep);font-weight:600;}
+  .timeline{display:flex;gap:28px;margin-top:26px;flex-wrap:wrap;}
+  .timeline .t{border-left:2px solid var(--juniper);padding-left:12px;}
+  .timeline .t b{font-family:"Fraunces",serif;font-size:20px;font-variant-numeric:tabular-nums;display:block;}
+  .timeline .t span{font-size:13px;color:var(--ink-soft);}
+
+  .workshop-grid{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;}
+  .label{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--clay-deep);font-weight:600;}
+  .workshop h3{font-size:20px;margin-top:8px;}
+  .workshop p{color:var(--ink-soft);font-size:14.5px;margin-top:6px;max-width:54ch;}
+  .workshop .quotes{margin-top:10px;font-size:13.5px;color:var(--ink-soft);font-style:italic;}
+  .price-tag{font-family:"Fraunces",serif;font-size:32px;color:var(--ink);white-space:nowrap;text-align:right;}
+  .price-tag small{display:block;font-family:"Work Sans",sans-serif;font-size:12px;color:var(--ink-soft);font-weight:500;}
+
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  table.hours{width:100%;border-collapse:collapse;font-size:14.5px;}
+  table.hours td{padding:8px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;}
+  table.hours td:first-child{color:var(--ink-soft);}
+  table.hours td:last-child{text-align:right;}
+  .contact-block p{margin:0 0 10px;font-size:15px;}
+  .contact-block .k{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;}
+  .social-row{display:flex;gap:18px;margin-top:16px;font-size:13.5px;}
+  .social-row a{text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px;}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 40px;}
+  .footrow{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+  .disclaimer{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink-soft);line-height:1.6;max-width:76ch;}
+
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero .motif{max-width:200px;}
+    .philosophy-grid{grid-template-columns:1fr;}
+    .menu-grid{grid-template-columns:1fr;gap:30px;}
+    .room-grid{grid-template-columns:1fr;}
+    .price-grid{grid-template-columns:1fr;}
+    .price-cat:nth-child(-n+2){border-top:1px solid var(--line);padding-top:22px;}
+    .price-cat:first-child{border-top:none;padding-top:0;}
+    .ingredient .wrap{grid-template-columns:1fr;text-align:left;}
+    .leaf-badge{justify-content:flex-start;}
+    .practitioner-grid{grid-template-columns:1fr;}
+    .workshop-grid{grid-template-columns:1fr;}
+    .price-tag{text-align:left;}
+    .visit-grid{grid-template-columns:1fr;gap:30px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">🌿 <b>コンセプト・リデザイン案</b> — Alpha Remedial 様への営業提案サンプルです。公式サイトではありません / Concept redesign sample, not the official site</div>
+
+<header>
+  <div class="wrap headrow">
+    <div class="wordmark">ALPHA <span>REMEDIAL</span></div>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#practitioner">Practitioner</a>
+      <a href="#workshop">Workshop</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">Book on Fresha</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="border-top:none;">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Remedial Massage &amp; Organic Facial — Haymarket, Sydney</div>
+      <h1>Everyone is born with a natural healing system.</h1>
+      <p class="lead">Alpha Remedial pairs Japanese <span class="jp">整体</span> (seitai) treatment with Juniper's organic skincare — supporting the healing system every client already has, rather than working against it.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">Book on Fresha</a>
+        <a class="btn btn-ghost" href="tel:0466866280">Call 0466 866 280</a>
+      </div>
+    </div>
+    <figure class="photo-frame">
+      <img src="images/scene.jpg" alt="Treatment room at Alpha Remedial, Level 4, 793 George Street, Haymarket" style="object-position:70% 50%;">
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap philosophy-grid">
+    <div class="tag">Why Alpha</div>
+    <div>
+      <p class="quote">"Our organic facial treatments are completely safe and deliver amazing results. Everyone is born with a natural healing system. However, this system can decline due to various factors such as age, stress, illness, and lifestyle habits. Every service at Alpha Remedial focuses on boosting the client's own immunity."<cite>— Home, alpharemedial793.wixsite.com</cite></p>
+      <p class="note">The About page states this a little differently: <em>"All people are born with a natural healing system. However, it is declining due to various causes such as age, stress, vaccines and lifestyle habits."</em> Both pages agree on the same idea — Alpha Remedial's own organic skincare line, Juniper, is chosen because it's "designed to draw out each client's own skin regeneration ability" rather than mask the problem.</p>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Treatment menu</h2>
+    </div>
+    <p class="section-sub">Face and body treatments, performed with Juniper's certified organic products.</p>
+    <div class="menu-grid">
+      <div class="menu-col">
+        <h3>Face</h3>
+        <div class="item">
+          <div>
+            <div class="name">Organic Facial Treatment</div>
+            <div class="desc">Cleansing, deep cleansing, oil massage &amp; clay mask</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-col">
+        <h3>Body</h3>
+        <div class="item"><div><div class="name">Relaxation / Swedish Massage</div><div class="desc">Eases muscle tension, improves circulation</div></div></div>
+        <div class="item"><div><div class="name">Remedial Massage</div><div class="desc">Targets musculoskeletal dysfunction</div></div></div>
+        <div class="item"><div><div class="name">Deep Tissue Massage</div></div></div>
+        <div class="item"><div><div class="name">Sports Massage</div></div></div>
+        <div class="item"><div><div class="name">Aromatherapy Massage</div></div></div>
+        <div class="item"><div><div class="name">Pregnancy (Maternity) Massage</div></div></div>
+        <div class="item"><div><div class="name">Seitai &amp; Tenryojutsu Treatment</div></div><div class="jp-label">整体・テンリョウ術</div></div>
+      </div>
+    </div>
+    <p class="price-note">Our therapists are highly skilled and certified — remedial massage qualifications held in both Japan and Australia.</p>
+    <div class="room-grid">
+      <figure>
+        <div class="photo-frame"><img src="images/facial.png" alt="Organic facial treatment in progress at Alpha Remedial"></div>
+        <figcaption>Organic facial treatment</figcaption>
+      </figure>
+      <figure>
+        <div class="photo-frame"><img src="images/body.jpg" alt="Remedial massage treatment at Alpha Remedial" style="object-position:50% 30%;"></div>
+        <figcaption>Remedial / relaxation massage</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Full price list</h2>
+      <span class="section-sub">All prices as listed on Alpha Remedial's own menu page.</span>
+    </div>
+    <div class="price-grid">
+      <div class="price-cat">
+        <h4>Alpha Special <span class="jp-sub">30分/45分/60分の組み合わせ + ヘッドマッサージ</span></h4>
+        <div class="price-row"><span class="d">Relaxation/Facial 30 + Head 15 (45 min)</span><span class="p">$90</span></div>
+        <div class="price-row"><span class="d">Relaxation/Facial 30 + Head 30 (60 min)</span><span class="p">$110</span></div>
+        <div class="price-row"><span class="d">Relaxation/Facial 45 + Head 15 (60 min)</span><span class="p">$110</span></div>
+        <div class="price-row"><span class="d">Relaxation/Facial 45 + Head 30 (75 min)</span><span class="p">$140</span></div>
+        <div class="price-row"><span class="d">Relaxation 60 + Head 15 (75 min)</span><span class="p">$140</span></div>
+        <div class="price-row"><span class="d">Relaxation 60 + Head 30 (90 min)</span><span class="p">$160</span></div>
+      </div>
+      <div class="price-cat">
+        <h4>Recommended Packages <span class="jp-sub">推奨パッケージ — FUJI / UMI / HANA</span></h4>
+        <div class="price-row"><span class="d">FUJI — Body Massage 30 + Organic Facial 60</span><span class="p">$170</span></div>
+        <div class="price-row"><span class="d">UMI — Body Massage 30 + Facial 45 + Head 15</span><span class="p">$175</span></div>
+        <div class="price-row"><span class="d">HANA — Swedish 60 + Mini Facial 30</span><span class="p">$170</span></div>
+      </div>
+      <div class="price-cat">
+        <h4>Seitai &amp; Tenryojutsu Treatment <span class="jp-sub">セイタイ治療＆テンリョウ術</span></h4>
+        <div class="price-row"><span class="d">First visit, 60 min (incl. consultation)</span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d">Follow-up 45 min</span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d">Follow-up 60 min</span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d">Follow-up 75 min</span><span class="p">$150</span></div>
+        <div class="price-row"><span class="d">Follow-up 90 min</span><span class="p">$170</span></div>
+        <div class="price-row"><span class="d">Child first visit, under 18, 45 min</span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d">Child follow-up, under 18, 30 min</span><span class="p">$70</span></div>
+        <div class="addon">+$10 on any Seitai session while pregnant</div>
+      </div>
+      <div class="price-cat">
+        <h4>Organic Facial Treatment <span class="jp-sub">オーガニックフェイシャル治療</span></h4>
+        <div class="price-row"><span class="d">Mini Facial, 30 min</span><span class="p">$60</span></div>
+        <div class="price-row"><span class="d">45 min (incl. consultation)</span><span class="p">$90</span></div>
+        <div class="price-row"><span class="d">60 min (incl. consultation)</span><span class="p">$110</span></div>
+        <div class="price-row"><span class="d">Men's Facial, 50 min</span><span class="p">$100</span></div>
+      </div>
+      <div class="price-cat">
+        <h4>Remedial / Sports Massage</h4>
+        <div class="price-row"><span class="d">30 min</span><span class="p">$70</span></div>
+        <div class="price-row"><span class="d">45 min</span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d">60 min</span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d">75 min</span><span class="p">$150</span></div>
+        <div class="price-row"><span class="d">90 min</span><span class="p">$170</span></div>
+      </div>
+      <div class="price-cat">
+        <h4>Swedish / Relaxation Massage</h4>
+        <div class="price-row"><span class="d">30 min</span><span class="p">$60</span></div>
+        <div class="price-row"><span class="d">45 min</span><span class="p">$90</span></div>
+        <div class="price-row"><span class="d">60 min</span><span class="p">$110</span></div>
+        <div class="price-row"><span class="d">75 min</span><span class="p">$140</span></div>
+        <div class="price-row"><span class="d">90 min</span><span class="p">$160</span></div>
+      </div>
+      <div class="price-cat">
+        <h4>Pregnancy Massage</h4>
+        <div class="price-row"><span class="d">60 min</span><span class="p">$130</span></div>
+      </div>
+      <div class="price-cat">
+        <h4>Aroma Massage</h4>
+        <div class="price-row"><span class="d">30 min</span><span class="p">$70</span></div>
+        <div class="price-row"><span class="d">45 min</span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d">60 min</span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d">75 min</span><span class="p">$150</span></div>
+        <div class="price-row"><span class="d">90 min</span><span class="p">$170</span></div>
+      </div>
+      <div class="price-cat">
+        <h4>Deep Tissue Massage</h4>
+        <div class="price-row"><span class="d">30 min</span><span class="p">$70</span></div>
+        <div class="price-row"><span class="d">45 min</span><span class="p">$100</span></div>
+        <div class="price-row"><span class="d">60 min</span><span class="p">$120</span></div>
+        <div class="price-row"><span class="d">75 min</span><span class="p">$150</span></div>
+        <div class="price-row"><span class="d">90 min</span><span class="p">$175</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ingredient">
+  <div class="wrap">
+    <div>
+      <h2>Juniper, by name and by nature</h2>
+      <p>Facial treatments use Juniper's premium organic skincare line, chosen for its gentle, plant-based formulation and its ability to support the skin's own regenerative capacity rather than override it.</p>
+    </div>
+    <figure class="leaf-badge" style="width:100%;">
+      <div class="photo-frame" style="aspect-ratio:1/1;max-width:320px;margin:0 auto;">
+        <img src="images/juniper.png" alt="Juniper organic skincare products used at Alpha Remedial">
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="practitioner">
+  <div class="wrap practitioner-grid">
+    <div class="stat-pair">
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years in massage &amp; seitai</div>
+      </div>
+      <div>
+        <div class="stat-num">20k+</div>
+        <div class="stat-label">Clients treated</div>
+      </div>
+    </div>
+    <div class="practitioner">
+      <h3>Mayumi Arahata</h3>
+      <div class="jp-name">新原真由美</div>
+      <p>Founder and lead therapist at Alpha Remedial. Certified in remedial massage in both Japan and Australia, with over 15 years in the industry and more than 20,000 clients treated. Mayumi occasionally runs small, beginner-friendly massage workshops for people who are curious but have never had one.</p>
+      <span class="cred">Remedial Massage Therapist — certified in Japan &amp; Australia</span>
+      <div class="timeline">
+        <div class="t"><b>2007</b><span>Began working in Australia</span></div>
+        <div class="t"><b>2017</b><span>Opened MH Clinic</span></div>
+        <div class="t"><b>2020</b><span>Opened Alpha Remedial in the CBD</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="workshop" id="workshop">
+  <div class="wrap workshop-grid">
+    <div>
+      <div class="label">Upcoming workshop</div>
+      <h3>Intro to Massage — for complete beginners</h3>
+      <p>"What actually is a massage?" A small, unhurried group session covering hand-to-forearm dry &amp; oil massage and shoulder dry massage. No experience needed — oils, cream and tea included.</p>
+      <p class="quotes">"経験ゼロでもOK！少人数でゆっくり体験していただきます。マッサージは、ただ強く押したり揉んだりするだけではありません。"</p>
+      <p class="price-note">Sun 27 Sep, 10:00–11:30 · Level 4, 793 George St, Haymarket · Workshop enquiries: <a href="tel:0402922505">0402 922 505</a><br>Dates change — confirm the current session via Fresha or phone before attending.</p>
+    </div>
+    <div class="price-tag">$100<small>90 minutes</small></div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <h2>Hours</h2>
+      <table class="hours">
+        <tr><td>Monday</td><td>Closed</td></tr>
+        <tr><td>Tue – Sat</td><td>10:00 – 20:00 (last booking 18:30)</td></tr>
+        <tr><td>Sunday</td><td>10:00 – 18:00 (last booking 16:30)</td></tr>
+      </table>
+    </div>
+    <div class="contact-block">
+      <h2>Visit &amp; contact</h2>
+      <p><span class="k">Address</span>Level 4, 793 George Street, Haymarket NSW</p>
+      <p><span class="k">Phone (general)</span><a href="tel:0466866280">0466 866 280</a></p>
+      <p><span class="k">Phone (workshop)</span><a href="tel:0402922505">0402 922 505</a></p>
+      <p><span class="k">Email</span><a href="mailto:alpharemedial793@gmail.com">alpharemedial793@gmail.com</a></p>
+      <p><span class="k">Booking</span><a href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">Book online via Fresha ↗</a></p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/alpharemedial" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/alpharemedial" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.youtube.com/channel/UCL8FYCbtgqUv5fds3K0GzPA" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footrow">
+      <div class="wordmark">ALPHA <span>REMEDIAL</span></div>
+      <a class="btn btn-primary" href="https://www.fresha.com/a/alpha-japanese-remedial-massage-haymarket-793-george-street-bdtea38e/booking?employeeId=1342981" target="_blank" rel="noopener">Book on Fresha</a>
+    </div>
+    <div class="disclaimer">
+      これはWeb制作の営業提案として作成したコンセプト・リデザインです。Alpha Remedial様の公式サイトではなく、無断で運用・掲載しているものでもありません。掲載内容は同社の既存サイト(alpharemedial793.wixsite.com)・Freshaの公開情報を基に構成した試作品です。最新情報は公式の予約先(Fresha)・電話にてご確認ください。<br>
+      This is an unofficial concept redesign created as a portfolio / pitch sample and is not affiliated with or published by Alpha Remedial. Content is drawn from Alpha Remedial's own existing website and Fresha listing.
+    </div>
+  </div>
+</footer>
+</body>
+</html>
